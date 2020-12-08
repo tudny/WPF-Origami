@@ -1,3 +1,8 @@
+(******************************)
+(**         ORIGAMI          **)
+(** Autor: Aleksander Tudruj **)
+(******************************)
+
 
 type point = float * float
 
@@ -29,7 +34,7 @@ let cmp (x1, y1) (x2, y2) (a, b) =
 let zloz ((x1, y1) as p1) ((x2, y2) as p2) (kar : kartka) ((a, b) as q) =
   match cmp p1 p2 q with
   | 0. -> kar q
-  | w when w > 0. -> 0
+  | w when w < 0. -> 0
   | _ ->
     let bB = x2 -. x1
     and aA = y1 -. y2
