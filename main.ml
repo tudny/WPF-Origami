@@ -1,17 +1,40 @@
 open Origami;;
 
-(* #use "origami.ml";; *)
+let centr = (0., 0.);;
 
-let op=[((1.0,8.0),(5.0,10.0));((2.0,7.0),(9.0,3.0));((0.0,10.0),(7.0,0.0));((10.0,5.0),(6.0,9.0));((0.0,1.0),(8.0,2.0))];;
-let kartka=kolko (5.,5.) 4. ;;
-let test88=skladaj op kartka;;
+let gen n =
+  let rec aux acc i =
+    if i > n then acc
+    else
+      aux (((float_of_int(1 lsl i), 0.),
+            (float_of_int(1 lsl i), 1.))::acc) (i + 1)
+  in
+  aux [] 0;;
 
-Printf.printf "przebicia %d\n" (test88 (1., 9.));;
-Printf.printf "przebicia %d\n" (test88 (1.1, 9.));;
-Printf.printf "przebicia %d\n" (test88 (1., 9.1));;
-Printf.printf "przebicia %d\n" (test88 (0.9, 9.));;
-Printf.printf "przebicia %d\n" (test88 (1., 8.9));;
+let const = 24;;
+
+let l = gen const;;
+
+let a = kolko centr (max_float /. 4.);;
+
+let a = skladaj l a;;
+
+assert(a centr = (1 lsl const) + 1);;
+assert(a (1., 1.) = 1 lsl const);;
+assert(a (-1., -1.) = 2);;
+assert(a ((-.max_float) /. 2., (-.max_float) /. 2.) = 0);;
 
 
-assert (test88 (1.0,9.0)=1);;
+
+
+let x = prostokat (-16., -16.) (16., 16.);;
+let a = (0., -16.);;
+let b = (0., 16.);;
+let c = (-16., 0.);;
+let d = (16., 0.);;
+let x = skladaj [(a,d);(d,b);(b,c);(c,a)] x;;
+
+assert (x (0., 0.) = 5);;
+assert (x (6., 0.) = 3);;
+assert (x a = 1);;
 
