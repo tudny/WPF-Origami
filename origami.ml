@@ -23,13 +23,13 @@ let square x = x *. x
 (* Funkcja porównująca dwie liczby typu float z dokładnościa do eps = 1e-9 *)
 let compare a b =
   if abs_float (a -. b) <= eps then 0
-  else if a < b then 1
-  else -1
+  else if a < b then -1
+  else 1
 
 (* OPERATORY porównujące FLOATy *)
 
 let (<.) a b =
-  compare a b > 0
+  compare a b < 0
 
 let (=.) a b =
   compare a b = 0
