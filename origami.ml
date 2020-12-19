@@ -83,7 +83,7 @@ let reflect_point_over_line (a, b) p1 p2 =
 
 let zloz p1 p2 (kar : kartka) q =
   match cmp p1 p2 q with
-  | w when w =. 0. -> kar q
+  | w when w  =. 0. -> kar q
   | w when w <=. 0. -> 0
   | _ ->
     let r = reflect_point_over_line q p1 p2 in
